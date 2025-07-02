@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Codini</string>
+    <!-- Oyun Arayüzü -->
+    <string name="start_game">Spiel starten</string>
+    <string name="next_level">Nächstes Level</string>
+    <string name="restart_level">Level neu starten</string>
+    <string name="help">Hilfe</string>
+    
+    <!-- Seviye Açıklamaları -->
+    <string name="level_1_description">Bewege die Box zum roten Punkt! Benutze die Befehle um die Box zu steuern.</string>
+    <string name="level_2_description">Bewege zwei Boxen zu ihren Zielpunkten!</string>
+    <string name="level_3_description">Erstelle eine Schleife um die Boxen effizient zu bewegen!</string>
+    
+    <!-- Komutlar -->
+    <string name="command_move_forward">Vorwärts bewegen</string>
+    <string name="command_turn_right">Nach rechts drehen</string>
+    <string name="command_turn_left">Nach links drehen</string>
+    <string name="command_repeat">Wiederholen</string>
+    
+    <!-- Geribildirimler -->
+    <string name="success_message">Gut gemacht! Du hast das Level geschafft!</string>
+    <string name="try_again_message">Versuche es noch einmal!</string>
+    <string name="hint_message">Tipp: Versuche die Befehle in der richtigen Reihenfolge anzuordnen</string>
+    
+    <!-- Tutorial -->
+    <string name="tutorial_title">Wie man spielt</string>
+    <string name="tutorial_step_1">1. Wähle die Befehle aus der Liste aus</string>
+    <string name="tutorial_step_2">2. Ordne sie in der richtigen Reihenfolge an</string>
+    <string name="tutorial_step_3">3. Drücke auf Start um deinen Code auszuführen</string>
+</resources>
