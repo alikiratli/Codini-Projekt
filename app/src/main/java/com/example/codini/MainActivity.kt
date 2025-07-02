@@ -18,17 +18,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var commandPanel: LinearLayout
     private lateinit var gameModel: GameModel
 
-    // Native methods
-    private external fun nativeInit()
-    private external fun nativeRender()
-    private external fun nativeOnSurfaceCreated()
-    private external fun nativeOnSurfaceChanged(width: Int, height: Int)
-    private external fun nativeOnTouch(x: Float, y: Float)
+    // Native methods (geçici devre dışı)
+    // private external fun nativeInit()
+    // private external fun nativeRender()
+    // private external fun nativeOnSurfaceCreated()
+    // private external fun nativeOnSurfaceChanged(width: Int, height: Int)
+    // private external fun nativeOnTouch(x: Float, y: Float)
 
     companion object {
-        init {
-            System.loadLibrary("codini")
-        }
+        // init {
+        //     System.loadLibrary("codini")
+        // }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,44 +40,39 @@ class MainActivity : AppCompatActivity() {
         // Initialize GameModel
         gameModel = GameModel()
 
-        glSurfaceView = findViewById(R.id.glSurfaceView)
-        commandPanel = findViewById(R.id.commandPanel)
+        // glSurfaceView = findViewById(R.id.glSurfaceView)
+        // commandPanel = findViewById(R.id.commandPanel)
 
-        glSurfaceView.setEGLContextClientVersion(3)
-        glSurfaceView.setRenderer(object : GLSurfaceView.Renderer {
-            override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
-                nativeOnSurfaceCreated()
-            }
+        // glSurfaceView.setEGLContextClientVersion(3)
+        // glSurfaceView.setRenderer(object : GLSurfaceView.Renderer {
+        //     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
+        //         // nativeOnSurfaceCreated()  // devre dışı bırakıldı
+        //     }
 
-            override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-                nativeOnSurfaceChanged(width, height)
-            }
+        //     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        //         // nativeOnSurfaceChanged(width, height)  // devre dışı bırakıldı
+        //     }
 
-            override fun onDrawFrame(gl: GL10?) {
-                nativeRender()
-            }
-        })
+        //     override fun onDrawFrame(gl: GL10?) {
+        //         // nativeRender()  // devre dışı bırakıldı
+        //     }
+        // })
 
-        glSurfaceView.setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    nativeOnTouch(event.x, event.y)
-                    true
-                }
-                else -> false
-            }
-        }
+        // glSurfaceView.setOnTouchListener { _, event ->
+        //     // tüm touch olayları native çağrı olmadan işleniyor
+        //     true
+        // }
 
         setupLoginUI()
-        setupGameUI()
+        // setupGameUI()  // devre dışı bırakıldı, sadece login sonrası UI kurulacak
 
         // Zu Beginn Login-Bildschirm anzeigen
         showLoginScreen()
     }
 
     private fun setupGameUI() {
-        // Spiel-UI-Setup wird hier durchgeführt
-        initializeGame()
+        // Spiel-UI-Setup wird hier durchgeführt (devre dışı)
+        // initializeGame()
     }
 
     private fun setupLoginUI() {
@@ -144,7 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeGame() {
-        nativeInit()
+        // nativeInit() devre dışı bırakıldı
         updateCommandPanel(listOf("vorwärts", "rückwärts", "rechts", "links"))
     }
 

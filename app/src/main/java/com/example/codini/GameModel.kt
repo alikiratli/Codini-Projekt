@@ -26,6 +26,10 @@ data class LevelCompletion(
 )
 
 class GameModel {
+    init {
+        // Test kullanıcısı oluşturulur
+        registerUser("user", "parola")
+    }
     private val users = mutableMapOf<String, UserProfile>()
     private var currentUser: UserProfile? = null
     
