@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Background circle -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M100,100m-90,0a90,90 0 1,1 180,0a90,90 0 1,1 -180,0"/>
+    
+    <!-- Code symbol -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,70 L80,90 L60,110 L70,120 L100,90 L70,60 Z"/>
+    
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M140,70 L130,60 L100,90 L130,120 L140,110 L120,90 Z"/>
+    
+    <!-- Letter "C" -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M85,125 L85,155 Q85,160 90,160 L110,160 Q115,160 115,155 L115,125 Q115,120 110,120 L90,120 Q85,120 85,125 Z"/>
+        
+</vector>

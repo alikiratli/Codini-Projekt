@@ -34,14 +34,15 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
-        prefab = true
+        viewBinding = true
+        // prefab = true  // Temporarily disabled
     }
-    externalNativeBuild {
-        cmake {
-            path = file("src/main/cpp/CMakeLists.txt")
-            version = "3.22.1"
-        }
-    }
+    // externalNativeBuild {
+    //     cmake {
+    //         path = file("src/main/cpp/CMakeLists.txt")
+    //         version = "3.22.1"
+    //     }
+    // }
 }
 
 dependencies {

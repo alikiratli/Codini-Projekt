@@ -113,4 +113,38 @@ void android_main(struct android_app *pApp) {
         }
     } while (!pApp->destroyRequested);
 }
+
+// JNI fonksiyonları MainActivity için
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_nativeInit(JNIEnv *env, jobject thiz) {
+    aout << "Native init called" << std::endl;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_nativeRender(JNIEnv *env, jobject thiz) {
+    // Render işlemi - şimdilik boş
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_nativeOnSurfaceCreated(JNIEnv *env, jobject thiz) {
+    aout << "Surface created" << std::endl;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_nativeOnSurfaceChanged(JNIEnv *env, jobject thiz, jint width, jint height) {
+    aout << "Surface changed: " << width << "x" << height << std::endl;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_nativeOnTouch(JNIEnv *env, jobject thiz, jfloat x, jfloat y) {
+    aout << "Touch event: " << x << ", " << y << std::endl;
+}
+
+JNIEXPORT void JNICALL
+Java_com_example_codini_MainActivity_executeCommand(JNIEnv *env, jobject thiz, jstring command) {
+    const char *commandStr = env->GetStringUTFChars(command, nullptr);
+    aout << "Execute command: " << commandStr << std::endl;
+    env->ReleaseStringUTFChars(command, commandStr);
+}
+
 }

@@ -114,16 +114,32 @@
     </LinearLayout>
 
     <!-- Game Layout -->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/gameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/progressLayout"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- Game content will be added here -->
+        <!-- OpenGL Surface View -->
+        <android.opengl.GLSurfaceView
+            android:id="@+id/glSurfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3" />
+
+        <!-- Command Panel -->
+        <LinearLayout
+            android:id="@+id/commandPanel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#F0F0F0" />
         
-    </FrameLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

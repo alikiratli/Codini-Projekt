@@ -58,7 +58,7 @@ struct CommandGroup {
     std::string name;               // Grup adı
     std::string description;        // Açıklama
     std::vector<CommandType> commands; // Gruptaki komutlar
-    int unlockedAtLevel;           // Hangi seviyede açılıyor
+    int unlockedAtLevel;           // Auf welchem Level wird freigeschaltet
 };
 
 class Game {
@@ -159,7 +159,7 @@ public:
 private:
     void initializeCommandGroups() {
         commandGroups_ = {
-            // Seviye 1 - Temel Hareket
+            // Level 1 - Grundbewegung
             CommandGroup{
                 "Temel Bewegungen",
                 "Lerne die grundlegenden Bewegungsbefehle",
@@ -167,7 +167,7 @@ private:
                 1
             },
             
-            // Seviye 2 - Döngüler
+            // Level 2 - Schleifen
             CommandGroup{
                 "Schleifen",
                 "Wiederhole Aktionen mit Schleifen",
@@ -175,7 +175,7 @@ private:
                 2
             },
             
-            // Seviye 3 - Fonksiyonlar
+            // Level 3 - Funktionen
             CommandGroup{
                 "Funktionen",
                 "Erstelle und verwende eigene Funktionen",
@@ -183,7 +183,7 @@ private:
                 3
             },
             
-            // Seviye 4 - Koşullar
+            // Level 4 - Bedingungen
             CommandGroup{
                 "Bedingungen",
                 "Triff Entscheidungen basierend auf der Umgebung",
@@ -191,7 +191,7 @@ private:
                 4
             },
             
-            // Seviye 5 - Gelişmiş Hareketler
+            // Level 5 - Erweiterte Bewegungen
             CommandGroup{
                 "Erweiterte Bewegungen",
                 "Nutze fortgeschrittene Bewegungsbefehle",
@@ -199,7 +199,7 @@ private:
                 5
             },
             
-            // Seviye 6 - Özel Komutlar
+            // Level 6 - Spezielle Befehle
             CommandGroup{
                 "Spezielle Aktionen",
                 "Verwende spezielle Fähigkeiten",
@@ -249,7 +249,7 @@ private:
     std::vector<CommandType> getAvailableCommands() {
         std::vector<CommandType> available;
         
-        // Mevcut seviye için kullanılabilir komutları topla
+        // Verfügbare Befehle für das aktuelle Level sammeln
         for (const auto& group : commandGroups_) {
             if (group.unlockedAtLevel <= currentLevel_) {
                 available.insert(available.end(), 

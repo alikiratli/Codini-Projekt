@@ -5,43 +5,43 @@
 #include <vector>
 #include <string>
 
-// Seviye zorlukları
+// Level-Schwierigkeiten
 enum class Difficulty {
-    EASY,      // Başlangıç
-    MEDIUM,    // Orta
-    HARD,      // Zor
-    EXPERT     // Uzman
+    EASY,      // Anfänger
+    MEDIUM,    // Mittel
+    HARD,      // Schwer
+    EXPERT     // Experte
 };
 
-// Özel seviye nesneleri
+// Spezielle Level-Objekte
 struct LevelObject {
     enum class Type {
-        WALL,           // Duvar
-        BRIDGE,         // Köprü
-        SWITCH,         // Düğme
-        DOOR,          // Kapı
-        ITEM,          // Toplanabilir eşya
-        TELEPORTER,    // Işınlayıcı
-        OBSTACLE       // Engel
+        WALL,           // Wand
+        BRIDGE,         // Brücke
+        SWITCH,         // Schalter
+        DOOR,          // Tür
+        ITEM,          // Sammelbare Gegenstände
+        TELEPORTER,    // Teleporter
+        OBSTACLE       // Hindernis
     };
 
     Type type;
     Position position;
-    bool isActive;     // Düğmeler, kapılar için
-    int linkedId;      // Bağlantılı nesneler için (örn: düğme-kapı)
+    bool isActive;     // Für Schalter, Türen
+    int linkedId;      // Für verknüpfte Objekte (z.B. Schalter-Tür)
     std::string textureId;
 };
 
-// Seviye başarı koşulları
+// Level-Erfolgskriterien
 struct LevelCriteria {
-    int maxCommands;           // Maksimum komut sayısı
-    float timeLimit;           // Zaman sınırı (saniye)
-    int minItemsCollected;     // Minimum toplanması gereken eşya
-    bool requireOptimalPath;   // En kısa yol gerekli mi
-    std::vector<std::string> requiredCommands; // Kullanılması gereken komutlar
+    int maxCommands;           // Maximale Anzahl von Befehlen
+    float timeLimit;           // Zeitlimit (Sekunden)
+    int minItemsCollected;     // Mindest-Sammelgegenstände
+    bool requireOptimalPath;   // Ist optimaler Weg erforderlich
+    std::vector<std::string> requiredCommands; // Erforderliche Befehle
 };
 
-// Seviye tanımı
+// Level-Definition
 struct LevelDefinition {
     int levelNumber;
     std::string name;
@@ -49,37 +49,37 @@ struct LevelDefinition {
     Difficulty difficulty;
     ThemeType theme;
     
-    // Başlangıç durumu
-    std::vector<Position> startPositions;  // Kutuların başlangıç pozisyonları
-    std::vector<Position> targetPositions; // Hedef pozisyonları
+    // Startzustand
+    std::vector<Position> startPositions;  // Startpositionen der Boxen
+    std::vector<Position> targetPositions; // Zielpositionen
     
-    // Level özellikleri
-    std::vector<LevelObject> objects;      // Seviye nesneleri
-    std::vector<CommandType> availableCommands; // Kullanılabilir komutlar
-    LevelCriteria criteria;                // Başarı kriterleri
+    // Level-Eigenschaften
+    std::vector<LevelObject> objects;      // Level-Objekte
+    std::vector<CommandType> availableCommands; // Verfügbare Befehle
+    LevelCriteria criteria;                // Erfolgskriterien
     
-    // Öğretici ipuçları
-    std::vector<std::string> tutorials;    // Seviye ipuçları
-    std::vector<std::string> hints;        // Takılınca gösterilecek ipuçları
+    // Tutorial-Tipps
+    std::vector<std::string> tutorials;    // Level-Tipps
+    std::vector<std::string> hints;        // Hinweise bei Blockierung
 };
 
-// Tüm seviyelerin tanımları
+// Definition aller Level
 class LevelDefinitions {
 public:
     static std::vector<LevelDefinition> getAllLevels() {
         std::vector<LevelDefinition> levels;
 
-        // Seviye 1: Temel Hareketler
+        // Level 1: Grundbewegungen
         levels.push_back({
             1,
             "Erste Schritte",
             "Lerne die grundlegenden Bewegungsbefehle",
             Difficulty::EASY,
             ThemeType::ROBOT_LAB,
-            {{1, 1}},           // Başlangıç pozisyonu
-            {{4, 1}},           // Hedef pozisyonu
-            {},                 // Basit seviye, engel yok
-            {                   // Kullanılabilir komutlar
+            {{1, 1}},           // Startposition
+            {{4, 1}},           // Zielposition
+            {},                 // Einfaches Level, keine Hindernisse
+            {                   // Verfügbare Befehle
                 CommandType::MOVE_FORWARD,
                 CommandType::TURN_LEFT,
                 CommandType::TURN_RIGHT
@@ -101,7 +101,7 @@ public:
             }
         });
 
-        // Seviye 2: Döngüler
+        // Level 2: Schleifen
         levels.push_back({
             2,
             "Wiederholungen",
@@ -127,7 +127,7 @@ public:
                 90.0f,         // 90 saniye
                 0,             // Eşya yok
                 true,          // Optimal yol
-                {"LOOP_START"} // Döngü kullanılmalı
+                {"LOOP_START"} // Schleife muss verwendet werden
             },
             {                   // Öğretici
                 "Schleifen helfen dir, Befehle zu wiederholen",
@@ -139,7 +139,7 @@ public:
             }
         });
 
-        // Diğer seviyeler...
+        // Weitere Level...
         return levels;
     }
 };

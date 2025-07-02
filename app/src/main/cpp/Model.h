@@ -97,7 +97,7 @@ struct Theme {
 struct UserProgress {
     int currentLevel;
     int totalScore;
-    std::map<int, int> levelScores;  // level numarası -> puan
+    std::map<int, int> levelScores;  // Level-Nummer -> Punkte
     std::map<int, int> levelStars;   // level numarası -> yıldız sayısı (1-3)
     std::time_t lastPlayTime;
 };
@@ -125,7 +125,7 @@ struct Level {
     std::string description;
     Theme theme;
     std::vector<GameObject> decorations;
-    int baseScore;           // Temel seviye puanı
+    int baseScore;           // Basis-Level-Punkte
     int optimalCommandCount; // En iyi çözüm için gereken komut sayısı
 };
 
@@ -137,7 +137,7 @@ public:
     }
 
     bool loginUser(const std::string& username, const std::string& password) {
-        // Kullanıcı bilgilerini kontrol et ve giriş yap
+        // Benutzerdaten überprüfen und anmelden
         std::string hashedPassword = hashPassword(password);
         if (users_.find(username) != users_.end() && 
             users_[username].passwordHash == hashedPassword) {
@@ -151,7 +151,7 @@ public:
 
     bool registerUser(const std::string& username, const std::string& password) {
         if (users_.find(username) != users_.end()) {
-            return false; // Kullanıcı zaten var
+            return false; // Benutzer existiert bereits
         }
 
         UserProfile newUser;
@@ -166,13 +166,13 @@ public:
 
     void initializeLevel(int levelNumber) {
         if (!currentUser || !currentUser->isLoggedIn) {
-            return; // Kullanıcı girişi yapılmamış
+            return; // Benutzer ist nicht angemeldet
         }
 
         currentLevelNumber = levelNumber;
         currentLevel = Level();
 
-        // Her seviye için farklı tema seç
+        // Für jedes Level ein anderes Theme wählen
         ThemeType levelTheme;
         switch(levelNumber % 4) {
             case 0: levelTheme = ThemeType::SPACE; break;
@@ -242,7 +242,7 @@ public:
         int commandCount = commands.size();
         bool isOptimal = commandCount <= currentLevel.optimalCommandCount;
         
-        // Puan hesaplama
+        // Punkteberechnung
         float timeBonus = std::max(0.0f, 30.0f - timeSpent) * 2;  // 30 saniyeden hızlı bitirme bonusu
         int commandBonus = isOptimal ? 50 : 0;  // Optimal çözüm bonusu
         
@@ -253,14 +253,14 @@ public:
         if (isOptimal) stars++;  // Optimal çözüm için +1 yıldız
         if (timeSpent < 20.0f) stars++;  // Hızlı çözüm için +1 yıldız
         
-        // Kullanıcı ilerlemesini güncelle
+        // Benutzerfortschritt aktualisieren
         currentUser->progress.levelScores[currentLevelNumber] = score;
         currentUser->progress.levelStars[currentLevelNumber] = stars;
         currentUser->progress.totalScore += score;
         currentUser->progress.lastPlayTime = std::time(nullptr);
         
         if (currentLevelNumber == currentUser->progress.currentLevel) {
-            currentUser->progress.currentLevel++;  // Bir sonraki seviyeyi aç
+            currentUser->progress.currentLevel++;  // Nächstes Level freischalten
         }
         
         saveUserProgress();  // İlerlemeyi kaydet
