@@ -11,12 +11,14 @@ import android.opengl.GLSurfaceView
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 import com.example.codini.databinding.ActivityMainBinding
+import javax.microedition.khronos.egl.EGLConfig
+import javax.microedition.khronos.opengles.GL10
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var glSurfaceView: GLSurfaceView
-    private lateinit var commandPanel: LinearLayout
-    private lateinit var gameModel: GameModel
+    private val glSurfaceView get() = binding.glSurfaceView
+    private val commandPanel get() = binding.commandPanel
+    private val gameModel = GameModel()
 
     // Native methods (geçici devre dışı)
     // private external fun nativeInit()
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+<<<<<<< HEAD
         // Initialize GameModel
         gameModel = GameModel()
 
@@ -73,17 +76,52 @@ class MainActivity : AppCompatActivity() {
     private fun setupGameUI() {
         // Spiel-UI-Setup wird hier durchgeführt (devre dışı)
         // initializeGame()
+=======
+        initRendering()
+        setupLoginUI()
+        showLoginScreen()
+    }
+
+    private fun initRendering() {
+        glSurfaceView.setEGLContextClientVersion(3)
+        glSurfaceView.setRenderer(object : GLSurfaceView.Renderer {
+            override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) = nativeOnSurfaceCreated()
+
+            override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) = nativeOnSurfaceChanged(width, height)
+
+            override fun onDrawFrame(gl: GL10?) = nativeRender()
+        })
+        glSurfaceView.setOnTouchListener { _, event ->
+            event.action == MotionEvent.ACTION_DOWN && nativeOnTouch(event.x, event.y).let { true }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        glSurfaceView.onResume()
+    }
+
+    override fun onPause() {
+        glSurfaceView.onPause()
+        super.onPause()
+>>>>>>> bf23b1a (4. Commit)
     }
 
     private fun setupLoginUI() {
         binding.loginButton.setOnClickListener {
+<<<<<<< HEAD
             val username = binding.usernameInput.text.toString()
             val password = binding.passwordInput.text.toString()
             if (gameModel.loginUser(username, password)) {
+=======
+            val (user, pass) = binding.usernameInput.text.toString() to binding.passwordInput.text.toString()
+            if (gameModel.loginUser(user, pass)) {
+>>>>>>> bf23b1a (4. Commit)
                 showGameScreen()
                 updateUserProgress()
             } else {
                 showError(getString(R.string.login_error))
+<<<<<<< HEAD
             }
         }
         binding.registerButton.setOnClickListener {
@@ -93,7 +131,14 @@ class MainActivity : AppCompatActivity() {
                 showSuccess(getString(R.string.register_success))
             } else {
                 showError(getString(R.string.register_error))
+=======
+>>>>>>> bf23b1a (4. Commit)
             }
+        }
+        binding.registerButton.setOnClickListener {
+            val (user, pass) = binding.usernameInput.text.toString() to binding.passwordInput.text.toString()
+            if (gameModel.registerUser(user, pass)) showSuccess(getString(R.string.register_success))
+            else showError(getString(R.string.register_error))
         }
     }
 
@@ -102,9 +147,15 @@ class MainActivity : AppCompatActivity() {
         progress?.let {
             binding.levelText.text = getString(R.string.current_level, it.currentLevel)
             binding.scoreText.text = getString(R.string.total_score, it.totalScore)
+<<<<<<< HEAD
             // Sterne anzeigen
             val currentLevelStars = it.levelStars[it.currentLevel - 1] ?: 0
             updateStars(currentLevelStars)
+=======
+            // Show stars based on progress
+            val stars = it.levelStars[it.currentLevel - 1] ?: 0
+            updateStars(stars)
+>>>>>>> bf23b1a (4. Commit)
         }
     }
 
@@ -118,16 +169,23 @@ class MainActivity : AppCompatActivity() {
         binding.loginLayout.visibility = View.VISIBLE
         binding.gameLayout.visibility = View.GONE
         binding.progressLayout.visibility = View.GONE
+        glSurfaceView.onPause() // pause rendering when in login
     }
 
     private fun showGameScreen() {
         binding.loginLayout.visibility = View.GONE
         binding.gameLayout.visibility = View.VISIBLE
         binding.progressLayout.visibility = View.VISIBLE
+<<<<<<< HEAD
 
         // Aktuelles Level laden
         val currentLevel = gameModel.getCurrentLevel()
         gameModel.initializeLevel(currentLevel)
+=======
+        glSurfaceView.onResume() // resume rendering
+        // Initialize native game and load level
+        initializeGame()
+>>>>>>> bf23b1a (4. Commit)
     }
 
     private fun showSuccess(message: String) {

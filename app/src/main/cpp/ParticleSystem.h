@@ -28,7 +28,7 @@ public:
     }
 
     virtual void update(float deltaTime) {
-        // Parçacıkları güncelle
+        // Partikel aktualisieren
         for (auto it = particles_.begin(); it != particles_.end();) {
             updateParticle(*it, deltaTime);
             if (it->life <= 0) {
@@ -64,7 +64,7 @@ protected:
     std::mt19937 rng_;
 };
 
-// Başarı efekti için yıldız parçacıkları
+// Sterne-Partikel für Erfolgseffekt
 class StarEmitter : public ParticleEmitter {
 public:
     StarEmitter(const Vector2& position) 
@@ -75,7 +75,7 @@ public:
             Particle p;
             p.position = position_;
             
-            // Daire şeklinde dağılım
+            // Kreisförmige Verteilung
             float angle = random(0, 2 * M_PI);
             float speed = random(2.0f, 5.0f);
             p.velocity = {cos(angle) * speed, sin(angle) * speed};
@@ -85,7 +85,7 @@ public:
             p.scale = random(0.3f, 0.6f);
             p.life = random(0.5f, 1.5f);
             p.maxLife = p.life;
-            p.color = {1.0f, 1.0f, 0.0f}; // Sarı
+            p.color = {1.0f, 1.0f, 0.0f}; // Gelb
             p.alpha = 1.0f;
             
             particles_.push_back(p);
@@ -93,7 +93,7 @@ public:
     }
 };
 
-// Kod bloğu efekti için siber parçacıklar
+// Cyber-Partikel für Code-Block-Effekt
 class CodeParticleEmitter : public ParticleEmitter {
 public:
     CodeParticleEmitter(const Vector2& position)
@@ -104,7 +104,7 @@ public:
             Particle p;
             p.position = position_;
             
-            // Yukarı doğru akış
+            // Aufwärts fließend
             p.velocity = {random(-1.0f, 1.0f), random(-3.0f, -1.0f)};
             
             p.rotation = 0;
@@ -112,7 +112,7 @@ public:
             p.scale = random(0.2f, 0.4f);
             p.life = random(0.8f, 2.0f);
             p.maxLife = p.life;
-            p.color = {0.0f, 1.0f, 0.8f}; // Siber mavi
+            p.color = {0.0f, 1.0f, 0.8f}; // Cyber-Blau
             p.alpha = 1.0f;
             
             particles_.push_back(p);
@@ -127,7 +127,7 @@ public:
             emitter->update(deltaTime);
         }
         
-        // Boş emitterleri temizle
+        // Leere Emitter löschen
         emitters_.erase(
             std::remove_if(emitters_.begin(), emitters_.end(),
                 [](const std::unique_ptr<ParticleEmitter>& emitter) {
@@ -139,13 +139,13 @@ public:
 
     void addStarBurst(const Vector2& position) {
         auto emitter = std::make_unique<StarEmitter>(position);
-        emitter->emit(20); // 20 yıldız parçacığı
+        emitter->emit(20); // 20 Sterne-Partikel
         emitters_.push_back(std::move(emitter));
     }
 
     void addCodeEffect(const Vector2& position) {
         auto emitter = std::make_unique<CodeParticleEmitter>(position);
-        emitter->emit(10); // 10 kod parçacığı
+        emitter->emit(10); // 10 Code-Partikel
         emitters_.push_back(std::move(emitter));
     }
 

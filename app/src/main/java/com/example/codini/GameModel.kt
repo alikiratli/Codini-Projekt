@@ -1,5 +1,6 @@
 package com.example.codini
 
+<<<<<<< HEAD
 import java.util.*
 
 data class UserProgress(
@@ -86,5 +87,35 @@ class GameModel {
             3 -> listOf("vorwärts", "rechts", "links", "wiederholen", "schleife")
             else -> listOf("vorwärts", "rückwärts", "rechts", "links", "springen", "teleportieren")
         }
+=======
+data class UserProgress(
+    val currentLevel: Int,
+    val totalScore: Int,
+    val levelStars: Map<Int, Int>
+)
+
+class GameModel {
+    fun loginUser(username: String, password: String): Boolean {
+        // TODO: Implement actual login logic
+        return true
+    }
+
+    fun registerUser(username: String, password: String): Boolean {
+        // TODO: Implement actual registration logic
+        return true
+    }
+
+    fun getCurrentLevel(): Int {
+        // TODO: Return actual current level
+        return 1
+    }
+
+    fun initializeLevel(level: Int) {
+        // TODO: Initialize level data
+    }
+
+    fun getCurrentProgress(): UserProgress? {
+        return UserProgress(currentLevel = 1, totalScore = 0, levelStars = mapOf(1 to 0))
+>>>>>>> bf23b1a (4. Commit)
     }
 }

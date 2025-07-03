@@ -80,10 +80,10 @@ struct GameObject {
 };
 
 enum class ThemeType {
-    SPACE,      // Uzay teması: astronot, gezegenler, yıldızlar
-    OCEAN,      // Deniz teması: balıklar, denizaltı, mercanlar
-    FOREST,     // Orman teması: ağaçlar, hayvanlar, çiçekler
-    ROBOT_LAB   // Robot laboratuvarı: robotlar, makineler
+    SPACE,      // Weltraum-Thema: Astronaut, Planeten, Sterne
+    OCEAN,      // Meeresfrüchte-Thema: Fische, U-Boot, Korallen
+    FOREST,     // Wald-Thema: Bäume, Tiere, Blumen
+    ROBOT_LAB   // Roboterlabor: Roboter, Maschinen
 };
 
 struct Theme {
@@ -91,20 +91,24 @@ struct Theme {
     std::string backgroundTexture;
     std::string boxTexture;
     std::string targetTexture;
-    std::vector<std::string> decorativeElements; // Her temaya özel dekoratif elementler
+    std::vector<std::string> decorativeElements; // Dekorative Elemente spezifisch für jedes Thema
 };
 
 struct UserProgress {
     int currentLevel;
     int totalScore;
     std::map<int, int> levelScores;  // Level-Nummer -> Punkte
+<<<<<<< HEAD
     std::map<int, int> levelStars;   // level numarası -> yıldız sayısı (1-3)
+=======
+    std::map<int, int> levelStars;   // Level-Nummer -> Anzahl Sterne (1-3)
+>>>>>>> bf23b1a (4. Commit)
     std::time_t lastPlayTime;
 };
 
 struct UserProfile {
     std::string username;
-    std::string passwordHash;  // SHA-256 hash kullanılacak
+    std::string passwordHash;  // SHA-256 Hash wird verwendet
     UserProgress progress;
     bool isLoggedIn;
 };
@@ -125,8 +129,13 @@ struct Level {
     std::string description;
     Theme theme;
     std::vector<GameObject> decorations;
+<<<<<<< HEAD
     int baseScore;           // Basis-Level-Punkte
     int optimalCommandCount; // En iyi çözüm için gereken komut sayısı
+=======
+    int baseScore;           // Grundpunkte des Levels
+    int optimalCommandCount; // Benötigte Befehle für optimale Lösung
+>>>>>>> bf23b1a (4. Commit)
 };
 
 class GameModel {
@@ -137,7 +146,11 @@ public:
     }
 
     bool loginUser(const std::string& username, const std::string& password) {
+<<<<<<< HEAD
         // Benutzerdaten überprüfen und anmelden
+=======
+        // Benutzerdaten prüfen und anmelden
+>>>>>>> bf23b1a (4. Commit)
         std::string hashedPassword = hashPassword(password);
         if (users_.find(username) != users_.end() && 
             users_[username].passwordHash == hashedPassword) {
@@ -166,13 +179,21 @@ public:
 
     void initializeLevel(int levelNumber) {
         if (!currentUser || !currentUser->isLoggedIn) {
+<<<<<<< HEAD
             return; // Benutzer ist nicht angemeldet
+=======
+            return; // Benutzer nicht angemeldet
+>>>>>>> bf23b1a (4. Commit)
         }
 
         currentLevelNumber = levelNumber;
         currentLevel = Level();
 
+<<<<<<< HEAD
         // Für jedes Level ein anderes Theme wählen
+=======
+        // Verschiedenes Thema für jedes Level wählen
+>>>>>>> bf23b1a (4. Commit)
         ThemeType levelTheme;
         switch(levelNumber % 4) {
             case 0: levelTheme = ThemeType::SPACE; break;
@@ -223,7 +244,7 @@ public:
     }
 
     void addDecorativeElements(int count) {
-        // Rastgele pozisyonlarda dekoratif elementler ekle
+        // Dekorative Elemente an zufälligen Positionen hinzufügen
         for(int i = 0; i < count; i++) {
             float x = static_cast<float>(rand() % 8);
             float y = static_cast<float>(rand() % 8);
@@ -242,16 +263,22 @@ public:
         int commandCount = commands.size();
         bool isOptimal = commandCount <= currentLevel.optimalCommandCount;
         
+<<<<<<< HEAD
         // Punkteberechnung
         float timeBonus = std::max(0.0f, 30.0f - timeSpent) * 2;  // 30 saniyeden hızlı bitirme bonusu
         int commandBonus = isOptimal ? 50 : 0;  // Optimal çözüm bonusu
+=======
+        // Puan hesaplama
+        float timeBonus = std::max(0.0f, 30.0f - timeSpent) * 2;  // Bonus für schnellere Fertigstellung als 30 Sekunden
+        int commandBonus = isOptimal ? 50 : 0;  // Bonus für optimale Lösung
+>>>>>>> bf23b1a (4. Commit)
         
         int score = currentLevel.baseScore + static_cast<int>(timeBonus) + commandBonus;
         
-        // Yıldız hesaplama (1-3 arası)
-        int stars = 1;  // En az 1 yıldız
-        if (isOptimal) stars++;  // Optimal çözüm için +1 yıldız
-        if (timeSpent < 20.0f) stars++;  // Hızlı çözüm için +1 yıldız
+        // Sterne-Berechnung (1-3)
+        int stars = 1;  // Mindestens 1 Stern
+        if (isOptimal) stars++;  // +1 Stern für optimale Lösung
+        if (timeSpent < 20.0f) stars++;  // +1 Stern für schnelle Lösung
         
         // Benutzerfortschritt aktualisieren
         currentUser->progress.levelScores[currentLevelNumber] = score;

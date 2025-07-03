@@ -4,9 +4,15 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+<<<<<<< HEAD
     
     <path
         android:fillColor="#FFD700"
         android:pathData="M12,2l3.09,6.26L22,9.27l-5,4.87L18.18,22L12,18.77L5.82,22L7,14.14L2,9.27l6.91-1.01L12,2z"/>
         
+=======
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.63L12,2L9.19,8.63L2,9.24L7.46,13.97L5.82,21L12,17.27z"/>  
+>>>>>>> bf23b1a (4. Commit)
 </vector>

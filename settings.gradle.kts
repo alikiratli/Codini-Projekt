@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Codini"
 include(":app")
+// includeBuild("app/src/main/cpp/CMakeLists.txt")  // Aus CMake-Konfiguration entfernt

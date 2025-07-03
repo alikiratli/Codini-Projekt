@@ -1,30 +1,37 @@
 # For more information about using CMake with Android Studio, read the
 # documentation: https://d.android.com/studio/projects/add-native-code.html
 
+# Configure CMake for full game library
 cmake_minimum_required(VERSION 3.22.1)
-
 project("codini")
 
-# Creates your game shared library. The name must be the same as the
-# one used for loading in your Kotlin/Java or AndroidManifest.txt files.
-add_library(codini SHARED
+# Collect all Codini source files
+set(CODINI_SOURCES
         main.cpp
         AndroidOut.cpp
         Renderer.cpp
         Shader.cpp
         TextureAsset.cpp
-        Utility.cpp)
+        Utility.cpp
+)
 
-# Searches for a package provided by the game activity dependency
-find_package(game-activity REQUIRED CONFIG)
+# Include GameActivity and related native_app_glue and game-text-input sources
+set(GAME_ACTIVITY_DIR "$ENV{ANDROID_SDK_ROOT}/extras/android/game-activity/")
+if(EXISTS "${GAME_ACTIVITY_DIR}/GameActivity.cpp")
+    list(APPEND CODINI_SOURCES
+        ${GAME_ACTIVITY_DIR}/GameActivity.cpp
+        ${GAME_ACTIVITY_DIR}/../native_app_glue/android_native_app_glue.c
+        ${GAME_ACTIVITY_DIR}/game-text-input/gametextinput.cpp
+    )
+else()
+    message(STATUS "GameActivity sources not found at ${GAME_ACTIVITY_DIR}, skipping integration")
+endif()
 
-# Configure libraries CMake uses to link your target library.
+# Build shared library from all sources
+add_library(codini SHARED ${CODINI_SOURCES})
+
+# Link system libraries
 target_link_libraries(codini
-        # The game activity
-        game-activity::game-activity
-
-        # EGL and other dependent libraries required for drawing
-        # and interacting with Android system
         EGL
         GLESv3
         jnigraphics

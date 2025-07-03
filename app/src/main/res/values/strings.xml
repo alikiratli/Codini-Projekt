@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Codini</string>
+<<<<<<< HEAD
     
     <!-- Spiel-Benutzeroberfläche -->
     <string name="start_game">Spiel starten</string>
@@ -30,10 +31,13 @@
     <string name="tutorial_step_3">3. Drücke auf Start um deinen Code auszuführen</string>
     
     <!-- Login Screen -->
+=======
+>>>>>>> bf23b1a (4. Commit)
     <string name="username_hint">Benutzername</string>
     <string name="password_hint">Passwort</string>
     <string name="login_button">Anmelden</string>
     <string name="register_button">Registrieren</string>
+<<<<<<< HEAD
     
     <!-- Error Messages -->
     <string name="login_error">Benutzername oder Passwort ist falsch!</string>
@@ -49,4 +53,11 @@
     <string name="turn_left">Links</string>
     <string name="turn_right">Rechts</string>
     <string name="repeat">Wiederholen</string>
+=======
+    <string name="login_error">Anmeldung fehlgeschlagen</string>
+    <string name="register_success">Registrierung erfolgreich</string>
+    <string name="register_error">Registrierung fehlgeschlagen</string>
+    <string name="current_level">Level: %1$d</string>
+    <string name="total_score">Punktestand: %1$d</string>
+>>>>>>> bf23b1a (4. Commit)
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:width="200dp"
     android:height="200dp"
     android:viewportWidth="200"
@@ -24,4 +25,38 @@
         android:fillColor="#FFFFFF"
         android:pathData="M85,125 L85,155 Q85,160 90,160 L110,160 Q115,160 115,155 L115,125 Q115,120 110,120 L90,120 Q85,120 85,125 Z"/>
         
+=======
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FF4081"
+        android:pathData="M60,60m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+    
+    <!-- Code symbol < > -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,45L50,60L40,75L45,75L60,60L45,45Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,45L75,45L60,60L75,75L80,75L70,60Z" />
+    
+    <!-- Small robot icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M55,25h10v8h-10z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,33h20v15h-20z" />
+    <!-- Eyes as circles -->
+    <path
+        android:fillColor="#FF4081"
+        android:pathData="M57,38m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+    <path
+        android:fillColor="#FF4081"
+        android:pathData="M63,38m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+>>>>>>> bf23b1a (4. Commit)
 </vector>

@@ -4,7 +4,7 @@
 #include "Model.h"
 #include "Renderer.h"
 #include "ParticleSystem.h"
-#include "AudioManager.h"  // Ses yönetimi için header
+#include "AudioManager.h"  // Header für Audio-Management
 #include <memory>
 #include <vector>
 #include <queue>
@@ -53,12 +53,19 @@ enum class CommandType {
     ACTIVATE_SWITCH  // Schalter aktivieren
 };
 
-// Komut grupları için yapı
+// Struktur für Befehlsgruppen
 struct CommandGroup {
+<<<<<<< HEAD
     std::string name;               // Grup adı
     std::string description;        // Açıklama
     std::vector<CommandType> commands; // Gruptaki komutlar
     int unlockedAtLevel;           // Auf welchem Level wird freigeschaltet
+=======
+    std::string name;               // Gruppenname
+    std::string description;        // Beschreibung
+    std::vector<CommandType> commands; // Befehle in der Gruppe
+    int unlockedAtLevel;           // In welchem Level wird es freigeschaltet
+>>>>>>> bf23b1a (4. Commit)
 };
 
 class Game {
@@ -80,7 +87,7 @@ public:
     }
 
     void update(float deltaTime) {
-        // Parçacık sistemini güncelle
+        // Partikelsystem aktualisieren
         particleSystem_->update(deltaTime);
 
         switch (gameState_) {
@@ -131,7 +138,7 @@ public:
             renderer_->renderDecoration(decoration);
         }
 
-        // Parçacık efektlerini render et
+        // Partikeleffekte rendern
         for (const auto& emitter : particleSystem_->getEmitters()) {
             for (const auto& particle : emitter->getParticles()) {
                 renderer_->renderParticle(particle, emitter->getTextureName());
@@ -159,9 +166,13 @@ public:
 private:
     void initializeCommandGroups() {
         commandGroups_ = {
+<<<<<<< HEAD
             // Level 1 - Grundbewegung
+=======
+            // Level 1 - Grundbewegungen
+>>>>>>> bf23b1a (4. Commit)
             CommandGroup{
-                "Temel Bewegungen",
+                "Grundbewegungen",
                 "Lerne die grundlegenden Bewegungsbefehle",
                 {CommandType::MOVE_FORWARD, CommandType::TURN_LEFT, CommandType::TURN_RIGHT},
                 1
@@ -249,7 +260,11 @@ private:
     std::vector<CommandType> getAvailableCommands() {
         std::vector<CommandType> available;
         
+<<<<<<< HEAD
         // Verfügbare Befehle für das aktuelle Level sammeln
+=======
+        // Verfügbare Befehle für aktuelles Level sammeln
+>>>>>>> bf23b1a (4. Commit)
         for (const auto& group : commandGroups_) {
             if (group.unlockedAtLevel <= currentLevel_) {
                 available.insert(available.end(), 
@@ -267,13 +282,13 @@ private:
         Command cmd = commandQueue_.front();
         commandQueue_.pop();
         
-        // Komut yürütüldüğünde efekt
+        // Effekt beim Ausführen des Befehls
         if (auto* box = getSelectedBox()) {
             particleSystem_->addCodeEffect(Vector2{box->position.x, box->position.y});
         }
         
         switch (cmd.type) {
-            // Temel Hareket Komutları
+            // Grundbewegungsbefehle
             case CommandType::MOVE_FORWARD:
                 moveSelectedBox();
                 break;
@@ -284,7 +299,7 @@ private:
                 rotateSelectedBox(90.0f);
                 break;
                 
-            // Döngü Komutları
+            // Schleifenbefehle
             case CommandType::LOOP_START:
                 pushLoopContext(cmd.loopCount);
                 break;
@@ -292,7 +307,7 @@ private:
                 processLoopEnd();
                 break;
                 
-            // Koşul Komutları
+            // Bedingungsbefehle
             case CommandType::IF_PATH_AHEAD:
                 executeIfPathAhead();
                 break;
@@ -303,7 +318,7 @@ private:
                 processIfEnd();
                 break;
                 
-            // Gelişmiş Hareket Komutları
+            // Erweiterte Bewegungsbefehle
             case CommandType::JUMP:
                 executeJump();
                 break;
@@ -317,7 +332,7 @@ private:
                 executeUseItem();
                 break;
                 
-            // Özel Komutlar
+            // Spezielle Befehle
             case CommandType::TELEPORT:
                 executeTeleport();
                 break;
@@ -330,7 +345,7 @@ private:
         }
     }
 
-    // Yeni komut uygulamaları
+    // Neue Befehlsimplementierungen
     void executeIfPathAhead() {
         if (auto* box = getSelectedBox()) {
             float angle = box->rotation * M_PI / 180.0f;
@@ -338,10 +353,10 @@ private:
             float checkY = box->position.y + sin(angle);
             
             if (isValidPosition(checkX, checkY)) {
-                // Yol açıksa sonraki komutu işle
+                // Wenn Weg frei ist, nächsten Befehl ausführen
                 executeNextCommand();
             } else {
-                // Yol kapalıysa if bloğunu atla
+                // Wenn Weg blockiert ist, if-Block überspringen
                 skipToIfEnd();
             }
         }
@@ -351,13 +366,13 @@ private:
         if (auto* box = getSelectedBox()) {
             bool targetNearby = false;
             
-            // En yakın hedefi kontrol et
+            // Nächstes Ziel prüfen
             for (const auto& target : model_->getTargets()) {
                 float dx = target.position.x - box->position.x;
                 float dy = target.position.y - box->position.y;
                 float distance = sqrt(dx*dx + dy*dy);
                 
-                if (distance < 2.0f) { // 2 birim mesafe içinde
+                if (distance < 2.0f) { // Innerhalb von 2 Einheiten Entfernung
                     targetNearby = true;
                     break;
                 }
@@ -427,12 +442,12 @@ private:
             executionTimer_
         );
 
-        // Başarı yıldız efektleri
+        // Erfolgs-Sterneneffekte
         for (const auto& target : model_->getTargets()) {
             particleSystem_->addStarBurst(Vector2{target.position.x, target.position.y});
         }
 
-        // Level tamamlama animasyonu
+        // Level-Abschluss-Animation
         startLevelCompleteAnimation(completion);
     }
 

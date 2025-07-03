@@ -15,6 +15,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters += listOf("arm64-v8a")
+        }
     }
 
     buildTypes {
@@ -35,7 +39,13 @@ android {
     }
     buildFeatures {
         viewBinding = true
+<<<<<<< HEAD
         // prefab = true  // Temporarily disabled
+=======
+    }
+    packagingOptions {
+        pickFirst("lib/**/libc++_shared.so")
+>>>>>>> bf23b1a (4. Commit)
     }
     // externalNativeBuild {
     //     cmake {
@@ -44,13 +54,12 @@ android {
     //     }
     // }
 }
-
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.games.activity)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
